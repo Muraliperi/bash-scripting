@@ -11,6 +11,18 @@ else
 fi
 --------------------------------------------------------------------------------
 #!/bin/bash
+read -p "Enter your age: " age
+if [ $age -le 13 ]; then
+   echo "You are a Child"
+elif [ $age -gt 13 ] && [ $age -le 18 ]; then
+   echo "You are a Teenager"
+elif [ $age -gt 18 ] && [ $age -le 45 ]; then
+   echo "You are an Adult"
+else
+   echo "You are Old"
+fi
+--------------------------------------------------------------------------------
+#!/bin/bash
 echo "Enter your Age:"
 read age
 if [ $age -lt 20 ] || [ $age -gt 50 ]; then
