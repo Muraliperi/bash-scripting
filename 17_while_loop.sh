@@ -58,3 +58,125 @@ do
  echo "Hey, how are you. Press [Ctrl+C] to stop "
 done
 ----------------------------------------
+# While Loop Basic 1
+[root@ansible-control-node bash_automation]# cat while_loop4.sh
+#!/bin/bash
+cnt=1
+
+while [[ ${cnt} -le 8 ]]
+do
+    echo "${cnt}) Hello World !"
+    cnt=$((cnt+1))
+done
+[root@ansible-control-node bash_automation]#
+[root@ansible-control-node bash_automation]# cat random_servers.txt
+server1.prod.abc.com
+server2.test.xyz.com
+server3.pre-prod.abc.com
+server4.stag3.xyz.com
+server5.stag4.abc.com
+server6.dev.xyz.com
+server7.test3.abc.com
+[root@ansible-control-node bash_automation]#
+[root@ansible-control-node bash_automation]# cat while_loop5.sh
+#!/bin/bash
+# Type 1
+[root@ansible-control-node bash_automation]# while read -r line
+> do
+> echo ${line}
+> done <<< $(cat random_servers.txt)
+server1.prod.abc.com
+server2.test.xyz.com
+server3.pre-prod.abc.com
+server4.stag3.xyz.com
+server5.stag4.abc.com
+server6.dev.xyz.com
+server7.test3.abc.com
+[root@ansible-control-node bash_automation]#
+
+echo "=================================================="
+
+# Type 2
+[root@ansible-control-node bash_automation]# cat random_servers.txt | while read -r line
+> do
+>   echo "${line}"
+> done
+server1.prod.abc.com
+server2.test.xyz.com
+server3.pre-prod.abc.com
+server4.stag3.xyz.com
+server5.stag4.abc.com
+server6.dev.xyz.com
+server7.test3.abc.com
+[root@ansible-control-node bash_automation]#
+
+echo "=================================================="
+
+# Type 3
+
+[root@ansible-control-node bash_automation]# while read -r line
+> do
+>    echo "${line}"
+> done < random_servers.txt
+server1.prod.abc.com
+server2.test.xyz.com
+server3.pre-prod.abc.com
+server4.stag3.xyz.com
+server5.stag4.abc.com
+server6.dev.xyz.com
+server7.test3.abc.com
+[root@ansible-control-node bash_automation]#
+
+echo "=================================================="
+
+# Type 4
+[root@ansible-control-node bash_automation]# cat test_while_loop.sh
+#/bin/bash
+fileName=random_servers.txt
+while IFS='.' read -r f1 f2 f3 f4
+do
+  echo "${f1} : ${f2} : ${f3} : ${f4} "
+done < ${fileName}
+[root@ansible-control-node bash_automation]# sh test_while_loop.sh
+server1 : prod : abc : com
+server2 : test : xyz : com
+server3 : pre-prod : abc : com
+server4 : stag3 : xyz : com
+server5 : stag4 : abc : com
+server6 : dev : xyz : com
+server7 : test3 : abc : com
+[root@ansible-control-node bash_automation]#
+
+echo "=================================================="
+------------------------------------------------------------------------------------------------------
+# Type 5
+[root@ansible-control-node bash_automation]# fileName=random_servers.txt
+[root@ansible-control-node bash_automation]# while IFS='.' read -r f1 f2 remaining
+> do
+>   echo "${f1} ${f2}      ${remaining}"
+> done < ${fileName}
+server1 prod      abc.com
+server2 test      xyz.com
+server3 pre-prod      abc.com
+server4 stag3      xyz.com
+server5 stag4      abc.com
+server6 dev      xyz.com
+server7 test3      abc.com
+[root@ansible-control-node bash_automation]#
+echo "=================================================="
+------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat while_loop_with_break.sh
+#!/bin/bash
+num=1
+while :
+do
+  echo "${num} Hello world!"
+  num=$((num+1))
+  if [[ ${num} -eq 11 ]] ; then
+     break
+  fi
+  sleep 1
+done
+[root@ansible-control-node bash_automation]#
+------------------------------------------------
+
