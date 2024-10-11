@@ -1,0 +1,35 @@
+#!/bin/bash
+# If any one of command is failed in the sequence execution, then remaining commands will not be executed.
+# command two will get executed if command One executed successfully
+uname -a && uptime && dates && hostname && df -h
+[root@ansible-control-node bash_automation]#
+
+# Type_1: All commands executed because nginx was installed:
+[root@ansible-control-node bash_automation]# which nginx && nginx -V 2>&1 | awk 'NR==1 {print $3}' | tr '/' ' ' | awk '{print $2}'
+/usr/sbin/nginx
+1.14.1
+[root@ansible-control-node bash_automation]# yum remove nginx -y
+Removed:
+  nginx-1:1.14.1-9.module_el8.0.0+1060+3ab382d3.x86_64   nginx-all-modules-1:1.14.1-9.module_el8.0.0+1060+3ab382d3.noarch
+Complete!
+[root@ansible-control-node bash_automation]#
+
+# Type_2: Second command did not get executed, because first command failed since nginx package was removed.
+[root@ansible-control-node bash_automation]# which nginx && nginx -V 2>&1 | awk 'NR==1 {print $3}' | tr '/' ' ' | awk '{print $2}'
+/usr/bin/which: no nginx in (/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/.local/bin:/root/bin:/root/user_commands/bin)
+[root@ansible-control-node bash_automation]# yum install nginx -y
+Installed:
+  nginx-1:1.14.1-9.module_el8.0.0+1060+3ab382d3.x86_64   nginx-all-modules-1:1.14.1-9.module_el8.0.0+1060+3ab382d3.noarch
+Complete!
+[root@ansible-control-node bash_automation]#
+
+# Type_3: Both command executed because first command executed successfully.
+[root@ansible-control-node bash_automation]# which nginx 1>/dev/null 2>/dev/null && nginx -V
+nginx version: nginx/1.14.1
+built by gcc 8.5.0 20210514 (Red Hat 8.5.0-3) (GCC)
+built with OpenSSL 1.1.1k  FIPS 25 Mar 2021
+TLS SNI support enabled
+configure arguments: --prefix=/usr/share/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --http-client-body-temp-path=/var/lib/nginx/tmp/client_body --http-proxy-temp-path=/var/lib/nginx/tmp/proxy --http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi --http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi --http-scgi-temp-path=/var/lib/nginx/tmp/scgi --pid-path=/run/nginx.pid --lock-path=/run/lock/subsys/nginx --user=nginx --group=nginx --with-file-aio --with-ipv6 --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module=dynamic --with-http_image_filter_module=dynamic --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-http_perl_module=dynamic --with-http_auth_request_module --with-mail=dynamic --with-mail_ssl_module --with-pcre --with-pcre-jit --with-stream=dynamic --with-stream_ssl_module --with-debug --with-cc-opt='-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E'
+[root@ansible-control-node bash_automation]# echo $?
+0
+[root@ansible-control-node bash_automation]#
