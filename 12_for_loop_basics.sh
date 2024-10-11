@@ -49,6 +49,78 @@ do
 echo "value of i is: $i"
 done
 ---------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat infinite_for_loop.sh
+#!/bin/bash
+for (( ; ; ))
+do
+echo "This is an infinite for loop, press Ctrl+C to stop"
+done
+[root@ansible-control-node bash_automation]#
+------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat forLoopWithArrays.sh
+#!/bin/bash
+declare -a myPkgs
+declare -A devOpsTools
+myPkgs=(ansible httpd nginx vim nc docker)
+devOpsTools=([containerTool]=docker [configurationTool]=ansible [integration]=jenkins [infraTool]=terraform)
+
+# To print all values in array
+echo "${myPkgs[@]}"
+# To print index position for all values in Array
+echo "${!myPkgs[@]}"
+# Type 1 - Array / lists
+for pkg in ${myPkgs[@]}
+do
+  echo "Package name is : ${pkg}"
+done
+
+# Type 2 - Array
+for pkg in ${!myPkgs[@]}
+do
+  echo "Package name is : ${pkg}"
+done
+
+# Type 3 - Array
+
+for pkg in ${!myPkgs[@]}
+do
+        echo "${myPkgs[${pkg}]}"
+done
+
+[root@ansible-control-node bash_automation]#
+---------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat forLoopWithDict.sh
+#!/bin/bash
+declare -a myPkgs
+declare -A devOpsTools
+myPkgs=(ansible httpd nginx vim nc docker)
+devOpsTools=([containerTool]=docker [configurationTool]=ansible [integration]=jenkins [infraTool]=terraform)
+# To print all values in Dictionary
+echo "${devOpsTools[@]}"
+# To print all keys in Dictionary
+echo "${!DevOpsTools[@]}"
+# Type 1 - Print Dictionary values
+echo "Type 1 - Printing tools name.....values"
+for tool in ${devOpsTools[@]}
+do
+  echo "DevOps tools name is : ${tool}"
+done
+
+# Type 2 - Print Dictionary keys
+echo "Type 2 - Printing tools type.....keys"
+for tool in ${!devOpsTools[@]}
+do
+  echo "Package name is : ${tool}"
+done
+
+# Type 3 - Print dictionary values based on keys
+echo "Type 3 - Printing tools name based on types (values based on keys)"
+for tool in ${!devOpsTools[@]}
+do
+  echo "${devOpsTools[${tool}]}"
+done
+[root@ansible-control-node bash_automation]#
+---------------------------------------------------------
 # Basic for loop 6
 #!/bin/bash
 files="/etc/passwd /etc/shadow /etc/gpasswd /etc/gshadow /etc/groups /etc/resolv.conf"
@@ -118,6 +190,20 @@ else
    verifyNginxStat
    done
 fi
+[root@ansible-control-node bash_automation]#
+------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat for_loop.sh
+#!/bin/bash
+inputVal="${@}"
+for i in  ${inputVal}
+do
+   if command -v ${i} 1>/dev/null 2>&1 ; then
+      echo "${i} package already installed"
+   else
+      echo "${i} not found"
+   fi
+
+done
 [root@ansible-control-node bash_automation]#
 ------------------------------------------------------------
 [root@ansible-control-node bash_automation]# cat installPKGs_with_for_loop.sh
