@@ -15,3 +15,13 @@ echo "Total number of arguments : ${*}"
 IFS=','
 echo "Total number of arguments before IFS Internal Field Separator set to Comma character : ${*}"
 ---------------------------------------------------------------------------
+# For loop using command line argument
+#!/bin/bash -x
+[ $# -eq 0 ] && { echo "You have not provided any Arguments"; exit 1;}
+for file in $*
+do
+echo "< $file >"
+[ -f $file ] && ls -lrt $file || echo "$file missing"
+echo "-----------"
+done
+---------------------------------------------------------------------------
