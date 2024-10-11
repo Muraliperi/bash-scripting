@@ -13,3 +13,16 @@ Mon Sep  9 03:38:04 EDT 2024
 192.168.43.90
 [root@ansible-control-node bash_automation]#
 [root@ansible-control-node bash_automation]#
+------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat user_defined_file_descriptor_input_cli.sh
+# Input file should be present
+# we can use fd number to perform any actions
+[root@ansible-control-node bash_automation]# touch /tmp/xxyyzz.txt
+[root@ansible-control-node bash_automation]# exec 10< /tmp/xxyyzz.txt
+[root@ansible-control-node bash_automation]# cat <&10
+[root@ansible-control-node bash_automation]# vim /tmp/xxyyzz.txt
+[root@ansible-control-node bash_automation]# cat <&10
+Hello, Edited this file to play with File descriptor for input
+[root@ansible-control-node bash_automation]#
+[root@ansible-control-node bash_automation]#
+-------------------------------------------------------------------------------------------
