@@ -22,6 +22,12 @@ The value of f is 89
 Fri Oct 11 00:47:59 EDT 2024
 [root@ansible-control-node bash_automation]#
 ----------------------------------------------------------------------------------------------------------------------
+#!/bin/bash
+# When we add # symbol inside curly braces while referring variable ${#}, it counting the variable length
+shell_name=bash
+myShellLen=${#shell_name}
+echo "The length of '${shell_name}' is : ${myShellLen}"
+----------------------------------------------------------------------------------------------------------------------
 [root@ansible-control-node bash_automation]# cat common_vars
 #!/bin/bash
 ansible=$(ansible --version|awk 'NR==1 {print $3}'|cut -d ']' -f1)
