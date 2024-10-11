@@ -25,3 +25,41 @@ echo "< $file >"
 echo "-----------"
 done
 ---------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat shift_command_arguments.sh
+#!/bin/bash
+shift 2
+echo "${1}"
+echo "${2}"
+echo "${3}"
+
+
+# The shift command shifts/moves the command-line arguments to the left by one position.
+# The first argument is lost after using shift.
+# You can specify how many positions to shift (default is 1).
+
+<< mycomm
+[root@ansible-control-node bash_automation]# cat shift_command_arguments.sh
+#!/bin/bash
+shift 1
+echo "${1}"
+echo "${2}"
+echo "${3}"
+[root@ansible-control-node bash_automation]# sh shift_command_arguments.sh val1 val2 val3
+val2
+val3
+
+[root@ansible-control-node bash_automation]# vim shift_command_arguments.sh
+[root@ansible-control-node bash_automation]# cat shift_command_arguments.sh
+#!/bin/bash
+shift 2
+echo "${1}"
+echo "${2}"
+echo "${3}"
+[root@ansible-control-node bash_automation]# sh shift_command_arguments.sh val1 val2 val3
+val3
+
+
+[root@ansible-control-node bash_automation]#
+mycomm
+[root@ansible-control-node bash_automation]#
+---------------------------------------------------------------------------------
