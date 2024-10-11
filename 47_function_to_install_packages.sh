@@ -38,3 +38,13 @@ Complete!
 [root@ansible-control-node bash_automation]#
 mycomm
 [root@ansible-control-node bash_automation]#
+----------------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat reuse_functions.sh
+#!/bin/bash
+source /root/bash_automation/function_to_validate_packages.sh
+validatePKG ansible
+validatePKG httpd
+validatePKG jenkins
+validatePKG kernel
+[root@ansible-control-node bash_automation]#
+----------------------------------------------------------------------------------------------------------------
