@@ -17,3 +17,25 @@ command -v ${cmd} 1>/dev/null 2>/dev/null && { echo "${cmd} is installed"; echo 
 httpd is installed
 Path of httpd is /usr/sbin/httpd
 [root@ansible-control-node bash_automation]#
+-----------------------------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat install_nc_pkg_if_not_exist.sh
+#!/bin/bash
+# Check if package exist, if not install it
+pkgname=nc
+echo "Verifying nc command installation...."
+command -v ${pkgname} 1>/dev/null 2>/dev/null &&
+{
+  echo "${pkgname} is installed";
+  echo "Path of ${pkgname} is $(command -v ${pkgname})";
+  echo "Package ${pkgname} version is: $(nc --version 2>&1 |awk '{print $3}')";
+} ||
+
+{
+  echo "${pkgname} command is not installed on this host.";
+  echo "Installing ${pkgname} package";
+  yum install ${pkgname} -y;
+  echo "${pkgname} is installed now";
+  echo "Package ${pkgname} version is: $(nc --version 2>&1 |awk '{print $3}')";
+}
+[root@ansible-control-node bash_automation]#
+-----------------------------------------------------------------------------------------------------------------------------
