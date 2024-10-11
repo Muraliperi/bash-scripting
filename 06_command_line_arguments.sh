@@ -58,8 +58,19 @@ echo "${3}"
 [root@ansible-control-node bash_automation]# sh shift_command_arguments.sh val1 val2 val3
 val3
 
-
 [root@ansible-control-node bash_automation]#
 mycomm
+[root@ansible-control-node bash_automation]#
+---------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat shift_command_arguments2.sh
+#!/bin/bash
+echo "${1}"
+shift 1
+echo "${2}"
+echo "${3}"
+[root@ansible-control-node bash_automation]# sh shift_command_arguments2.sh val1 val2 val3
+val1
+val3
+
 [root@ansible-control-node bash_automation]#
 ---------------------------------------------------------------------------------
