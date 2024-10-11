@@ -47,3 +47,12 @@ command -v ${pkgname} 1>/dev/null 2>/dev/null &&
 }
 [root@ansible-control-node bash_automation]#
 -----------------------------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat read_file_content.sh
+#!/bin/bash
+filename=${1}
+[[ "${#}" -eq 0 ]] && { echo "Please pass any arguments, ex: ./${0} /tmp/testfile.txt"; exit; }
+[[ "${#}" -ne 1 ]] && { echo "You have to provide input as a File, ex: ./${0} /tmp/testfile.txt"; exit; }
+[[ -d ${filename} ]] && { echo "${filename} is a directory, Please provide file path"; exit 1; }
+[[ -e ${filename} ]] || { echo "File ${filename} not Found"; exit 1; }
+[[ -r ${filename} ]] && cat "${filename}" || echo "You don't have permission for ${filename} File"
+[root@ansible-control-node bash_automation]#
