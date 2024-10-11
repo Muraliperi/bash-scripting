@@ -11,6 +11,14 @@ echo "Your password is: $mypass"
 echo -e "\n"
 echo "Your first number is $FN and Second number is $SN"
 
+#!/bin/bash
+fruits="Apple Orange Mango"
+echo $fruits
+read -r fruit1 fruit2 fruit3 <<< $fruits
+echo $fruit1
+echo $fruit2
+echo $fruit3
+
 # -p PROMPT: Display a prompt before reading input.
 # -t TIMEOUT: Set a time limit for input. If the user does not provide input within TIMEOUT seconds, read will return a non-zero status.
 # -s: Silent mode. Do not echo input to the terminal (useful for passwords).
