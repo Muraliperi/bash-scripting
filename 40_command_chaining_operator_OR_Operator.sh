@@ -18,6 +18,14 @@ httpd is installed
 Path of httpd is /usr/sbin/httpd
 [root@ansible-control-node bash_automation]#
 -----------------------------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat  get_PKG_path.sh
+#!/bin/bash
+# read -rp "Enter any package name: " pkgname
+pkgname="${1}"
+# rpm -q ${pkgname} 1>/dev/null 2>/dev/null && command -v ${pkgname} || echo "${pkgname} doesn't exit"
+command -v ${pkgname} 1>/dev/null 2>/dev/null && echo "The path of ${pkgname} is: $(command -v ${pkgname})" || echo "${pkgname} is not Found"
+[root@ansible-control-node bash_automation]#
+-----------------------------------------------------------------------------------------------------------------------------
 [root@ansible-control-node bash_automation]# cat install_nc_pkg_if_not_exist.sh
 #!/bin/bash
 # Check if package exist, if not install it
