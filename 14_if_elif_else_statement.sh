@@ -55,3 +55,33 @@ elif [ $age == 40 ]; then
 else
    echo "You are in 50's generation"
 fi
+------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat if_elif_else_install_pkg.sh
+#!/bin/bash
+pkgname="${1}"
+user_id="$(id -u)"
+if [[ ${user_id} -ne 0 ]]; then
+   echo "You need to become root user to execute this script, Please switch to root user"
+   exit 1
+fi
+
+if [[ ${#} -ne 1 ]]; then
+   echo "Please provide a package name to install"
+   exit 2
+fi
+
+if command -v ${pkgname} 1>/dev/null 2>&1; then
+   echo "Package ${pkgname} already installed. Skipping package installation"
+   exit 3
+
+else
+   yum install ${pkgname} -y 1>/dev/null 2>&1
+   exitStat="${?}"
+   if [[ ${exitStat} -ne 0 ]]; then
+      echo "Package installation failed"
+   else
+      echo "Package installed successfully"
+   fi
+fi
+[root@ansible-control-node bash_automation]#
+-----------------------------------------------------------------------------------
