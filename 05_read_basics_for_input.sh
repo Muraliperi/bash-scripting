@@ -6,6 +6,9 @@ echo -e "The $web_service service status is \033[93m$status\033[0m"
 #!/bin/bash
 read -t 3 -p "Enter First number: " FN
 read -t 3 -p "Enter Second number: " SN
+read -s -p "Enter your password: " mypass
+echo "Your password is: $mypass"
+echo -e "\n"
 echo "Your first number is $FN and Second number is $SN"
 
 # -p PROMPT: Display a prompt before reading input.
