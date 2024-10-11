@@ -24,3 +24,6 @@ HEllo, How ArE you ?
 [root@ansible-control-node bash_automation]# ps auxf|grep httpd | grep -v grep | awk '{print $2}' | tr '\n' ' '
 20231 20232 20233 20234 20235 
 [root@ansible-control-node bash_automation]#
+[root@ansible-control-node bash_automation]# ansibleversion=$(ansible --version | awk 'NR==1 {print $3}' | tr -d "]")
+[root@ansible-control-node bash_automation]# javaversion=$(java -version 2>&1 | awk 'NR==1 {print $3}' | tr -d '"')
+[root@ansible-control-node bash_automation]#
