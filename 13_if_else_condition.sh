@@ -1,4 +1,13 @@
 #!/bin/bash
+echo "Enter your password:"
+read -s passwd
+if [ "$passwd" == "redhat" ]; then
+   echo "Password verified"
+else
+   echo "Password denied"
+fi
+-----------------------------------------------------------
+#!/bin/bash
 if [ $1 -gt 250 ]
 then
   echo "You have entered a number that is greater than 250"
@@ -7,7 +16,7 @@ else
 fi
 
 # $1 is the command line argument. User needs to provide any number when executing this script. Ex: ./if_else_condition.sh 34
-
+-----------------------------------------------------------
 #!/bin/bash
 if [ -f /tmp/testfile.txt ]
 then
