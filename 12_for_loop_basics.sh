@@ -120,3 +120,27 @@ else
 fi
 [root@ansible-control-node bash_automation]#
 ------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat installPKGs_with_for_loop.sh
+#!/bin/bash
+userid=$(id -u)
+if [[ ${userid} -ne 0 ]] ; then
+   echo "You must be root to perform this task"
+   exit 1
+fi
+
+installPKG(){
+   reqPKG=${1}
+   if command -v ${reqPKG} 1>/dev/null 2>&1; then
+       echo "${reqPKG} is already deployed"
+   else
+       echo "############# ${reqPKG} not found on this host ##################"
+       echo "############# Installing ${reqPKG} on the host ##################"
+       yum install ${reqPKG} -y
+   fi
+}
+
+for pkg in httpd ansible nc docker nginx
+do
+    installPKG ${pkg}
+done
+[root@ansible-control-node bash_automation]#
