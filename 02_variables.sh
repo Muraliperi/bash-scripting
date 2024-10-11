@@ -40,6 +40,23 @@ myshell=SHELL
 myshellLow=${myshell,,}
 echo ${myshellLow}
 ----------------------------------------------------------------------------------------------------------------------
+#!/bin/bash
+myshellScr="Hello, Welcome to Shell scripting !"
+echo ${myshellScr:7:7}
+
+# Slicing particular word from sentence, based on range numbers.
+# First 7 --> Index position
+# Second 7 --> Length count from the previously selected position
+----------------------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat replacing_new_variable_value_using_backslash.sh
+#!/bin/bash
+[root@ansible-control-node bash_automation]# myVar="Bash Scripting"
+[root@ansible-control-node bash_automation]# echo ${myVar}
+Bash Scripting
+[root@ansible-control-node bash_automation]# echo ${myVar/Bash/Bash Shell}
+Bash Shell Scripting
+[root@ansible-control-node bash_automation]#
+----------------------------------------------------------------------------------------------------------------------
 [root@ansible-control-node bash_automation]# cat common_vars
 #!/bin/bash
 ansible=$(ansible --version|awk 'NR==1 {print $3}'|cut -d ']' -f1)
