@@ -92,3 +92,31 @@ do
 echo $i
 echo -e "\e[31m`ssh $host $adhoc`\e[0m"
 done
+--------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat introLoops.sh
+#!/bin/bash
+
+verifyNginxStat() {
+   echo "Waiting for 30 seconds...."
+   sleep 3
+   if systemctl status nginx.service 1>/dev/null 2>&1 ; then
+      echo "nginx is running"
+   else
+      echo "nginx is not running"
+   fi
+}
+
+if systemctl status nginx 1>/dev/null 2>&1 ; then
+   echo "nginx is already up and running"
+   exit 0
+else
+   echo "nginx service is not running"
+   echo "Starting nginx service ....."
+   systemctl start nginx.service 1>/dev/null 2>&1
+   for each in $(seq 4)
+   do
+   verifyNginxStat
+   done
+fi
+[root@ansible-control-node bash_automation]#
+------------------------------------------------------------
