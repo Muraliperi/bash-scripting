@@ -22,3 +22,16 @@ root@ansible-control-node bash_automation]# echo $((23 + 78))
 [root@ansible-control-node bash_automation]# echo $((23 / 78))
 0
 [root@ansible-control-node bash_automation]#
+----------------------------------------------------------------
+[root@ansible-control-node bash_automation]# abc=200
+[root@ansible-control-node bash_automation]# echo $(( abc++ ))
+200
+[root@ansible-control-node bash_automation]# echo $(( abc++ ))
+201
+[root@ansible-control-node bash_automation]# echo $(( abc++ ))
+202
+[root@ansible-control-node bash_automation]# echo $(( abc++ ))
+203
+[root@ansible-control-node bash_automation]# echo $(( abc-- ))
+204
+[root@ansible-control-node bash_automation]# echo $(( abc-- ))
