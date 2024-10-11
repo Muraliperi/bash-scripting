@@ -8,6 +8,20 @@ else
 fi
 -----------------------------------------------------------
 #!/bin/bash
+passwd=/etc/passwd
+read -p "Enter user name: " user
+cat "$passwd"|grep -iw "$user" > /dev/null
+status=$?
+if test $status -eq 0
+# OR
+# if [$? -eq 0]
+then
+   echo "User $user exist"
+else
+   echo "User $user doesn't exist"
+fi
+---------------------------------------------------------
+#!/bin/bash
 if [ $1 -gt 250 ]
 then
   echo "You have entered a number that is greater than 250"
