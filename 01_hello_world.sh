@@ -22,3 +22,24 @@ $(date)
 -------using without quotes---------
 Fri Oct 11 00:41:08 EDT 2024
 [root@ansible-control-node bash_automation]#
+======================================================================
+[root@ansible-control-node bash_automation]# cat test.sh
+#!/bin/bash
+x=67
+y=98
+z=76
+echo "printing x value with double quotes"
+echo "$x"
+echo "printing x value with single quotes"
+echo '$x'
+echo "printing x value without quotes"
+echo $x
+[root@ansible-control-node bash_automation]# sh test.sh
+printing x value with double quotes
+67
+printing x value with single quotes
+$x
+printing x value without quotes
+67
+[root@ansible-control-node bash_automation]#
+
