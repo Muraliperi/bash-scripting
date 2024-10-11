@@ -23,6 +23,19 @@ else
 fi
 --------------------------------------------------------------------------------
 #!/bin/bash
+read -p "Enter your name:" name
+if test $name = "john"
+then
+   echo "You are not selected $name"
+elif [ $name = "murali" ]; then
+   echo "You are selected $name and congratulations for your successful journey!"
+elif [ $name != "john" ] || [ $name != "murali" ] && [ ! -z $name ]; then
+   echo "Sorry, you are not selected $name"
+elif [ -z $name ]; then
+   echo "Please enter your name, Name cannot be empty"
+fi
+--------------------------------------------------------------------------------
+#!/bin/bash
 echo "Enter your Age:"
 read age
 if [ $age -lt 20 ] || [ $age -gt 50 ]; then
