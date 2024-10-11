@@ -1,3 +1,13 @@
+[root@ansible-control-node bash_automation]# cat while_with_options1.sh
+#!/bin/bash
+userName=${1}
+passwd=${2}
+cat << EOF
+userName: ${userName}
+password: ${passwd}
+EOF
+[root@ansible-control-node bash_automation]#
+---------------------------------------------------------------------------
 [root@ansible-control-node bash_automation]# cat heredoc.sh
 #!/bin/bash
 
