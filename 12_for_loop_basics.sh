@@ -57,3 +57,12 @@ do
 [ -f $file ] && echo "File found $file" || echo "File missing $file"
 done
 ---------------------------------------------------------
+# For loop using command line argument
+#!/bin/bash -x
+[ $# -eq 0 ] && { echo "You have not provided any Arguments"; exit 1;}
+for file in $*
+do
+echo "< $file >"
+[ -f $file ] && ls -lrt $file || echo "$file missing"
+echo "-----------"
+done
