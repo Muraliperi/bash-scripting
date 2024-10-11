@@ -42,3 +42,18 @@ ab value after changing to Hello string 0
 bc value is 345
 ab + bc after trying with updated ab value is 345
 [root@ansible-control-node bash_automation]#
+---------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat defining_constant_variable.sh
+#!/bin/bash
+# declare -r is to set constant/readonly variable. 
+[root@ansible-control-node bash_automation]# declare -r verma=/home/ansusr/tempdir/datafile
+[root@ansible-control-node bash_automation]# echo $verma
+/home/ansusr/tempdir/datafile
+[root@ansible-control-node bash_automation]# verma=78
+bash: verma: readonly variable
+[root@ansible-control-node bash_automation]# verma=apple
+bash: verma: readonly variable
+[root@ansible-control-node bash_automation]# unset verma
+bash: unset: verma: cannot unset: readonly variable
+[root@ansible-control-node bash_automation]#
+[root@ansible-control-node bash_automation]#
