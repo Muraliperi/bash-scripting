@@ -63,3 +63,24 @@ ansible: 2.13.00
 Ansible: Puppet
 [root@ansible-control-node bash_automation]#
 ------------------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat arrays_to_list_files.sh
+#/bin/bash
+declare -a shellScrFiles
+declare -a todayDate
+declare -a shadowFile
+shellScrFiles=($( ls /root/bash_automation))
+echo "${shellScrFiles[@]}"
+echo "${shellScrFiles[0]}"
+todayDate=($( date ))
+echo "${todayDate[@]}"
+oldIFS=${IFS}
+IFS=":"
+shadowFile=($(cat /etc/passwd))
+IFS=${oldIFS}
+echo "${shadowFile[@]}"
+echo "${shadowFile[1]}"
+echo "${shadowFile[4]}"
+echo "${shadowFile[6]}"
+[root@ansible-control-node bash_automation]#
+------------------------------------------------------------------------------------------------------------------
+
