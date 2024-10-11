@@ -76,3 +76,13 @@ return $c
 add_function
 echo $?
 --------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat defining_function_and_calling_with_arguments.sh
+#!/bin/bash
+addition() {
+        num1=${1}
+        num2=${2}
+        result=$((num1 + num2))
+        echo "${result}"
+}
+addition ${1} ${2}
+[root@ansible-control-node bash_automation]#
