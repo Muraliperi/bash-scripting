@@ -28,6 +28,18 @@ shell_name=bash
 myShellLen=${#shell_name}
 echo "The length of '${shell_name}' is : ${myShellLen}"
 ----------------------------------------------------------------------------------------------------------------------
+#!/bin/bash
+# Converting a string into Upper case letters
+myshell=bashshell
+myshellUp=${myshell^^}
+echo ${myshellUp}
+----------------------------------------------------------------------------------------------------------------------
+#!/bin/bash
+# Converting string to Lower case
+myshell=SHELL
+myshellLow=${myshell,,}
+echo ${myshellLow}
+----------------------------------------------------------------------------------------------------------------------
 [root@ansible-control-node bash_automation]# cat common_vars
 #!/bin/bash
 ansible=$(ansible --version|awk 'NR==1 {print $3}'|cut -d ']' -f1)
