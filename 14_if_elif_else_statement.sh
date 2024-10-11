@@ -85,3 +85,37 @@ else
 fi
 [root@ansible-control-node bash_automation]#
 -----------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat if_elif_else_service_stat.sh
+#!/bin/bash
+serviceName=${1}
+systemctl status ${serviceName} 1>/dev/null 2>&1
+exitCode=$?
+
+if [[ ${#} -eq 0 ]]; then
+   echo "Provide a service name as input"
+   echo "./<script_name> <service_name>"
+   echo "ex. ./if_elif_else_service_stat.sh httpd"
+
+elif [[ ${#} -ne 1 ]]; then
+   echo "Provide only one service name as input"
+
+elif [[ ${exitCode} -eq 4 ]]; then
+   echo "${serviceName} is not Found"
+
+elif [[ ${exitCode} -eq 3 ]]; then
+   echo "${serviceName} is not running"
+
+elif [[ "${exitCode}" -eq 0 ]]; then
+   echo "${serviceName} is running"
+
+else
+   echo "Unknown error, exit code is ${exitCode}"
+fi
+
+# exit code 4 - Service is not found
+# exit code 3 - Service is not running
+# exit code 0 - Service is running
+[root@ansible-control-node bash_automation]#
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
