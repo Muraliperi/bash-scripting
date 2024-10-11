@@ -84,3 +84,11 @@ done
 echo ""
 done
 ----------------------------------------------------------
+# Executing ad-hoc command on all servers
+#!/bin/bash
+read -p "Please enter the adhoc command: " adhoc
+for host in $(cat /root/bash_automation/hosts)
+do
+echo $i
+echo -e "\e[31m`ssh $host $adhoc`\e[0m"
+done
