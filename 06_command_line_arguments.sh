@@ -74,3 +74,60 @@ val3
 
 [root@ansible-control-node bash_automation]#
 ---------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat cmd_line_args_with_array.sh
+#!/bin/bash
+declare -a myCmdArgs
+# Taking all arguments in myCmdArgs array
+myCmdArgs=( ${@} )
+# Printing all given arguments
+echo "${myCmdArgs[@]}"
+# Printing 4th Index positioned argument from myCmdArgs array
+echo "${myCmdArgs[4]}"
+[root@ansible-control-node bash_automation]# sh cmd_line_args_with_array.sh 12 14 19 15 16 90
+12 14 19 15 16 90
+16
+[root@ansible-control-node bash_automation]#
+---------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat cmd_line_args_with_array_and_IFS.sh
+#!/bin/bash
+declare -a myCmdArgs
+# Taking all arguments in myCmdArgs array
+# We are mentioning : as a Internal Field Separator (IFS)
+IFS=":"
+myCmdArgs=( ${@} )
+# Printing all given arguments
+echo "${myCmdArgs[@]}"
+# Printing 4th Index positioned argument from myCmdArgs array
+echo "${myCmdArgs[4]}"
+# Execute below command to test
+# sh cmd_line_args_with_array_and_IFS.sh 12:13:14:15:16:17
+
+[root@ansible-control-node bash_automation]# sh cmd_line_args_with_array_and_IFS.sh 12:13:14:15:16:17
+12 13 14 15 16 17
+16
+[root@ansible-control-node bash_automation]#
+-------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat cmd_line_args_with_array_and_IFS_Best_practices.sh
+#!/bin/bash -x
+declare -a myCmdArgs
+# Taking all arguments in myCmdArgs array
+# We are mentioning : as a Internal Field Separator (IFS)
+# Assigning original IFS value to a Variable
+#oldIFS=${IFS}
+IFS=":"
+myCmdArgs=( ${@} )
+# Revoking original IFS value back
+IFS=${oldIFS}
+
+# Printing all given arguments
+echo "${myCmdArgs[@]}"
+# Printing 4th Index positioned argument from myCmdArgs array
+echo "${myCmdArgs[4]}"
+# Execute below command to test
+# sh cmd_line_args_with_array_and_IFS.sh 12:13:14:15:16:17
+[root@ansible-control-node bash_automation]# sh cmd_line_args_with_array_and_IFS.sh 12:13:14:15:16:17
+12 13 14 15 16 17
+16
+[root@ansible-control-node bash_automation]#
+-------------------------------------------------------------------------------------
+
