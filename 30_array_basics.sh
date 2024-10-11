@@ -44,3 +44,22 @@ echo "Removing 'Welcome' from the Array"
 unset mylist1[2]
 echo "${mylist1[@]}"
 [root@ansible-control-node bash_automation]#
+---------------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat example_arrays.sh
+#!/bin/bash
+declare -a dockerInfo
+declare -a confMngtTool
+declare -a devOpsToolInfo
+dockerInfo=(docker 31.89.0)
+confMngtTool=(ansible 2.13.00)
+devOpsToolInfo=(Ansible Puppet Chef Jenkins)
+echo "${dockerInfo[0]}: ${dockerInfo[1]}"
+echo "${confMngtTool[0]}: ${confMngtTool[1]}"
+echo "${devOpsToolInfo[0]}: ${devOpsToolInfo[1]}"
+
+[root@ansible-control-node bash_automation]# sh example_arrays.sh
+docker: 31.89.0
+ansible: 2.13.00
+Ansible: Puppet
+[root@ansible-control-node bash_automation]#
+------------------------------------------------------------------------------------------------------------------
