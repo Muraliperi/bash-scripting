@@ -36,3 +36,18 @@ Apache/2.4.37
 2.16.3
 [root@ansible-control-node bash_automation]#
 -------------------------------------------------------------------------------------------------------------------------
+[root@ansible-control-node bash_automation]# cat export_command_to_provide_inputs_for_variables.sh
+#!/bin/bash
+# First you need to execute 'export AnsiVer=$(ansible --version)' command on Terminal
+# If you close and re-open the terminal then, this variable will be disappeared
+echo "Ansible version is : ${AnsiVer}"
+
+# 'export -p' can be executed to check if AnsiVer variable is available in the environmental variable.
+#
+[root@ansible-control-node bash_automation]# export DockerVersion=12.178-ops1
+[root@ansible-control-node bash_automation]# export -p|grep Docker
+declare -x DockerVersion="12.178-ops1"
+[root@ansible-control-node bash_automation]# set |grep Dock
+DockerVersion=12.178-ops1
+[root@ansible-control-node bash_automation]#
+-------------------------------------------------------------------------------------------------------------------------
