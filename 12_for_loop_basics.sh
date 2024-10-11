@@ -34,7 +34,7 @@ do
 echo "Weekday $((i++)) is $day"
 done
 ---------------------------------------------------------
-# Basic for loop 4
+# Basic for loop 5
 #!/bin/bash
 n=1
 for i in "Sun Mon Tue Wed Thu Fri Sat" "1 2 3 4 5 6 7"
@@ -47,5 +47,13 @@ done
 for (( i=1; i<=10; i++))
 do
 echo "value of i is: $i"
+done
+---------------------------------------------------------
+# Basic for loop 6
+#!/bin/bash
+files="/etc/passwd /etc/shadow /etc/gpasswd /etc/gshadow /etc/groups /etc/resolv.conf"
+for file in $files
+do
+[ -f $file ] && echo "File found $file" || echo "File missing $file"
 done
 ---------------------------------------------------------
