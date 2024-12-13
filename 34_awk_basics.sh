@@ -65,6 +65,13 @@ uid=1010(ansuser) gid=1012(ansuser) groups=1012(ansuser)
 1010
 [root@ansible-control-node bash_automation]#
 
+# fgrep keyword data.tf: Searches for lines containing the keyword in the file data.tf.
+# fgrep -v 173: Filters out lines that contain the number 173.
+# awk -F\: '{print $2}': Splits each line by the colon (:) and prints the second field.
+# sort: Sorts the output alphabetically.
+# awk -F\. '{print $1 "." $2 "." $3}': Splits each line by the period (.) and prints the first three fields.
+# uniq -c: Counts the number of unique lines.
+fgrep keyword data.tf | fgrep -v 173 | awk -F\: '{print $2}' | sort | awk -F\. '{print $1 "." $2 "." $3}' | uniq -c
 
 # Combination of cut and awk
 [root@ansible-control-node bash_automation]# java -version
