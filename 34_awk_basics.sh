@@ -15,6 +15,8 @@ cat awkfile | awk '{print $1}'  --> To cut second column
 cat awkfile | awk '{print $1$2}'  --> To cut first & second column
 cat awkfile | awk '{print $1,$2}'  --> To cut first & second column with Space
 cat awkfile | awk '{print $NF}'  --> To cut last row value of each column.
+cat awkfile | awk '{print $NF}'  --> To cut last row value of each column.
+cat test.sh | awk 'NR==1'        --> To print only first row.
 -----------------------------------------------------------------------------
 Moderate concepts with awk:
 cat awkfile | awk '/Thomas/'   --> To search Thomas keyword in entire file.
