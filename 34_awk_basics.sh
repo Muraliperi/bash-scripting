@@ -113,3 +113,5 @@ basic_echo.sh
 [root@ansible-control-node bash_automation]#
 [root@ansible-control-node bash_automation]# 
 ----------------------------------------------------------------------------------------
+# Additional information
+# https://www.builddevops.com/post/mastering-awk-a-beginner-friendly-guide-with-examples
