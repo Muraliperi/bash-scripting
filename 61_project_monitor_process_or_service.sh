@@ -55,3 +55,33 @@ do
 done
 [root@ansible-control-node bash_automation]#
 --------------------------------------------------------------------------------------------------------------------------------------------------
+[root@test-lab-rhel ~]# cat service_monitor.bsh
+#!/bin/bash
+
+serviceName=${1}
+PS=/usr/bin/ps
+WC=/usr/bin/wc
+GREP=/bin/grep
+
+serviceCount=$(${PS} auxf | ${GREP} ${serviceName} | ${GREP} -v grep | ${GREP} -v ${0} | ${WC} -l)
+
+# Normalize to 0 or 1
+if [[ ${serviceCount} -eq 0 ]]; then
+    status=0
+    message="Down"
+else
+    status=1
+    message="Up"
+fi
+
+mkdir -p /tmp/zabbix/
+
+# Write formatted JSON
+cat <<EOF > /tmp/zabbix/${serviceName}_service_status.json
+{
+  "service": "${serviceName}",
+  "status": ${status},
+  "message": "${message}"
+}
+EOF
+[root@test-lab-rhel ~]#
